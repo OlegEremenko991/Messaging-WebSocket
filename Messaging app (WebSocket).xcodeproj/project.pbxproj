@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 		6750E6D324ADC22B00F25B51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D224ADC22B00F25B51 /* ViewController.swift */; };
 		6750E6D524ADC46300F25B51 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D424ADC46300F25B51 /* MessageModel.swift */; };
 		6750E6D724ADC84200F25B51 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D624ADC84200F25B51 /* TableViewCell.swift */; };
+		6750E6DA24ADCECA00F25B51 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 6750E6D924ADCECA00F25B51 /* Starscream */; };
+		6750E6E324AE378500F25B51 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 6750E6E224AE378500F25B51 /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6750E6E324AE378500F25B51 /* SwiftyJSON in Frameworks */,
+				6750E6DA24ADCECA00F25B51 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +96,10 @@
 			dependencies = (
 			);
 			name = "Messaging app (WebSocket)";
+			packageProductDependencies = (
+				6750E6D924ADCECA00F25B51 /* Starscream */,
+				6750E6E224AE378500F25B51 /* SwiftyJSON */,
+			);
 			productName = "Messaging app (WebSocket)";
 			productReference = 6750E6B924ADBA1800F25B51 /* Messaging app (WebSocket).app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +128,10 @@
 				Base,
 			);
 			mainGroup = 6750E6B024ADBA1800F25B51;
+			packageReferences = (
+				6750E6D824ADCECA00F25B51 /* XCRemoteSwiftPackageReference "Starscream" */,
+				6750E6E124AE378500F25B51 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 6750E6BA24ADBA1800F25B51 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -350,6 +362,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6750E6D824ADCECA00F25B51 /* XCRemoteSwiftPackageReference "Starscream" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/daltoniam/Starscream";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.3;
+			};
+		};
+		6750E6E124AE378500F25B51 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6750E6D924ADCECA00F25B51 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6750E6D824ADCECA00F25B51 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+		6750E6E224AE378500F25B51 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6750E6E124AE378500F25B51 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6750E6B124ADBA1800F25B51 /* Project object */;
 }

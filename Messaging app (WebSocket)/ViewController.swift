@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var username = ""
+    var login = ""
         
     @IBOutlet weak var nextBarButton: UIBarButtonItem!
     override func viewDidLoad() {
@@ -22,12 +22,13 @@ class ViewController: UIViewController {
         let vc = segue.destination as? ViewController1 else {
             return
         }
-        vc.username = username
+        vc.username = login
     }
 
     @IBAction func loginChanged(_ sender: UITextField) {
         if let _ = sender.text!.rangeOfCharacter(from: NSCharacterSet.letters){
             nextBarButton.isEnabled = true
+            login = sender.text!
         } else {
             nextBarButton.isEnabled = false
         }
