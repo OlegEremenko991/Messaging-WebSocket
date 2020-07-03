@@ -9,17 +9,16 @@
 import UIKit
 
 extension LoginVC: UITextFieldDelegate {
+    // Разрешаем ввод в текстфилде строго по маске
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let char = string.cString(using: String.Encoding.utf8)!
-        let isBackSpace = strcmp(char, "\\b")
-        
-        if (isBackSpace == -92) {
-            return true
+        do {
+            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: [])
+            if regex.firstMatch(in: string, options: [], range: NSMakeRange(0, string.count)) != nil {
+                return false
+            }
         }
-        
-        if string.isCyrillicOrSymbols {
-            nextBarButton.isEnabled = false
-            return false
+        catch {
+            print("ERROR")
         }
         return true
     }
