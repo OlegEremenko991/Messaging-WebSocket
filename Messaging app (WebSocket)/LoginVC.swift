@@ -22,8 +22,7 @@ class LoginVC: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "loginEntered",
-        let vc = segue.destination as? MessagingVC else {
+        guard let vc = segue.destination as? MessagingVC else {
             return
         }
         vc.username = login

@@ -10,7 +10,7 @@ import UIKit
 import Starscream
 import SwiftyJSON
 
-class MessagingVC: UIViewController, UITextFieldDelegate {
+class MessagingVC: UIViewController {
 
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
@@ -99,6 +99,17 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: Отправка сообщений
+    
+    func sendAction(){
+        messageTextfield.endEditing(false)
+        sendMessage(messageTextfield.text!)
+        messageTextfield.text = ""
+    }
+    
+    @IBAction func sendPressed(_ sender: UIButton) {
+        sendAction()
+    }
+    
     // создаем словарь и преобразовываем его в строку для отправки
     fileprivate func sendMessage(_ message: String) {
         let dictToSend = ["text": "\(message)"]
@@ -108,12 +119,6 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
                 return
         }
         socket.write(string: jsonString)
-    }
-    
-    @IBAction func sendPressed(_ sender: UIButton) {
-        messageTextfield.endEditing(false)
-        sendMessage(messageTextfield.text!)
-        messageTextfield.text = ""
     }
     
     //MARK: Получение сообщений

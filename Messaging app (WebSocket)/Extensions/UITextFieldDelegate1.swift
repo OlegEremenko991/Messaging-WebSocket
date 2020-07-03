@@ -27,4 +27,13 @@ extension LoginVC: UITextFieldDelegate {
         }
         return true
     }
+    
+    // Переходим на второй экран при нажатии enter в текстфилде
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text!.isEmpty {
+            return false
+        }
+        performSegue(withIdentifier: "loginEntered", sender: self)
+        return true
+    }
 }
