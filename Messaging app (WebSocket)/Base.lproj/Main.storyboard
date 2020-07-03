@@ -55,6 +55,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginTextField" destination="LBR-OC-nPU" id="nWX-cr-f9d"/>
                         <outlet property="nextBarButton" destination="rE1-TD-q5B" id="ccR-1Y-epc"/>
                     </connections>
                 </viewController>

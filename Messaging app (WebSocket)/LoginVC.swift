@@ -12,11 +12,13 @@ class LoginVC: UIViewController {
     var login = ""
     var characterSet = CharacterSet.urlQueryAllowed
         
+    @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var nextBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nextBarButton.isEnabled = false
+        loginTextField.keyboardType = .asciiCapable
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
