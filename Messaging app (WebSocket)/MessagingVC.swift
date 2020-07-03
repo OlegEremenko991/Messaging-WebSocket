@@ -4,7 +4,7 @@
 //
 //  Created by Олег Еременко on 02.07.2020.
 //  Copyright © 2020 Oleg Eremenko. All rights reserved.
-// TARGET: ws://pm.tada.team/ws?name=test123
+// TARGET: ws://pm.tada.team/ws?name=testUser
 
 import UIKit
 import Starscream
@@ -31,7 +31,7 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
 //        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=" + "\(username)")!))
-        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=testUser")!))
+        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=sUser")!))
         socket.delegate = self
         socket.connect()
         
@@ -64,9 +64,15 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // Отправляем сообщение: создаем словарь и преобразовываем его в строку для отправки
     fileprivate func sendMessage(_ message: String) {
-      socket.write(string: message)
-        print("Send this: \(message)")
+        let dictToSend = ["name": "\(username)", "text": "\(message)"]
+        let encoder = JSONEncoder()
+        guard let jsonData = try? encoder.encode(dictToSend),
+            let jsonString = String(data: jsonData, encoding: .utf8) else {
+                return
+        }
+        socket.write(string: jsonString)
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {

@@ -18,5 +18,5 @@ class Message {
     }
 }
 /*
- {"created":"2020-07-02T12:05:17.275966489Z","name":"test user1","text":"some text"}
+ {"created":"2020-07-03T10:05:17.275966489Z","name":"sUser","text":"some text"}
  */
