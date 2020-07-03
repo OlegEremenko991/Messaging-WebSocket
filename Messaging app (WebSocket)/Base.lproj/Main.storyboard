@@ -24,12 +24,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-OC-nPU">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login in English" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-OC-nPU">
                                         <rect key="frame" x="0.0" y="55.5" width="200" height="34.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
                                         <connections>
                                             <action selector="loginChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="pc0-fF-YS0"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="qrl-Kk-K5Q"/>
                                         </connections>
                                     </textField>
                                 </subviews>
@@ -70,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gPW-2F-Te2">
-                                <rect key="frame" x="0.0" y="88" width="414" height="704"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="separatorColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -126,7 +127,7 @@
                                 </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FWf-yp-Oln">
-                                <rect key="frame" x="15" y="792" width="384" height="50"/>
+                                <rect key="frame" x="15" y="812" width="384" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your message here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IVc-db-gfb">
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="34"/>
@@ -155,9 +156,9 @@
                             <constraint firstItem="gPW-2F-Te2" firstAttribute="leading" secondItem="7DC-h1-tWA" secondAttribute="leading" id="7Gp-B9-6Wj"/>
                             <constraint firstItem="7DC-h1-tWA" firstAttribute="trailing" secondItem="gPW-2F-Te2" secondAttribute="trailing" id="EJO-XD-2a8"/>
                             <constraint firstItem="FWf-yp-Oln" firstAttribute="leading" secondItem="7DC-h1-tWA" secondAttribute="leading" constant="15" id="JtV-6S-uDA"/>
-                            <constraint firstItem="7DC-h1-tWA" firstAttribute="bottom" secondItem="FWf-yp-Oln" secondAttribute="bottom" constant="20" id="O4O-3d-Rst"/>
                             <constraint firstItem="FWf-yp-Oln" firstAttribute="top" secondItem="gPW-2F-Te2" secondAttribute="bottom" id="VZH-E4-bFs"/>
                             <constraint firstItem="7DC-h1-tWA" firstAttribute="trailing" secondItem="FWf-yp-Oln" secondAttribute="trailing" constant="15" id="hIw-Aq-c57"/>
+                            <constraint firstItem="7DC-h1-tWA" firstAttribute="bottom" secondItem="FWf-yp-Oln" secondAttribute="bottom" id="kIG-t1-HXe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7DC-h1-tWA"/>
                     </view>
@@ -167,6 +168,7 @@
                         <outlet property="messageTableView" destination="gPW-2F-Te2" id="9rR-Gd-h8D"/>
                         <outlet property="messageTextfield" destination="IVc-db-gfb" id="pCN-xv-SsI"/>
                         <outlet property="sendButton" destination="OzC-FH-JHl" id="sgN-bb-2G3"/>
+                        <outlet property="textBottomConstraint" destination="kIG-t1-HXe" id="Cpb-H3-vP5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UWl-Tp-HUX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

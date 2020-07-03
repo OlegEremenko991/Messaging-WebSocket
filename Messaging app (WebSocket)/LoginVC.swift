@@ -10,6 +10,7 @@ import UIKit
 
 class LoginVC: UIViewController {
     var login = ""
+    var characterSet = CharacterSet.urlQueryAllowed
         
     @IBOutlet weak var nextBarButton: UIBarButtonItem!
     
@@ -27,11 +28,27 @@ class LoginVC: UIViewController {
     }
 
     @IBAction func loginChanged(_ sender: UITextField) {
-        if let _ = sender.text!.rangeOfCharacter(from: NSCharacterSet.letters){
+        if let _ = sender.text!.rangeOfCharacter(from: characterSet){
             nextBarButton.isEnabled = true
             login = sender.text!
         } else {
             nextBarButton.isEnabled = false
         }
+    }
+}
+
+extension LoginVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let char = string.cString(using: String.Encoding.utf8)!
+        let isBackSpace = strcmp(char, "\\b")
+        
+        if (isBackSpace == -92) {
+            print("Backspace was pressed")
+            return true
+        }
+        
+        if string == " " || string.isCyrillic { return false }
+
+        return true
     }
 }
