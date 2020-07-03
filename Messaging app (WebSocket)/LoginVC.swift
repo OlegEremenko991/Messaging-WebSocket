@@ -45,11 +45,14 @@ extension LoginVC: UITextFieldDelegate {
         let isBackSpace = strcmp(char, "\\b")
         
         if (isBackSpace == -92) {
-            print("Backspace was pressed")
+//            print("Backspace was pressed")
             return true
         }
         
-        if string == " " || string.isCyrillic { return false }
+        if string == " " || string.isCyrillic {
+            nextBarButton.isEnabled = false
+            return false
+        }
 
         return true
     }
