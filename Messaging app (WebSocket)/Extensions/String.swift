@@ -9,12 +9,13 @@
 import Foundation
 
 extension String {
-    var isCyrillic: Bool {
+    var isCyrillicOrSymbols: Bool {
         let upper = "АБВГДЕËЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
         let lower = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+        let forbiddenSymbols = "%^{}'<>`"
 
         for c in self.map({ String($0) }) {
-            if !upper.contains(c) && !lower.contains(c) { return false }
+            if !upper.contains(c) && !lower.contains(c) && !forbiddenSymbols.contains(c) { return false }
         }
         return true
     }

@@ -49,7 +49,7 @@ extension LoginVC: UITextFieldDelegate {
             return true
         }
         
-        if string == " " || string.isCyrillic {
+        if string == " " || string.isCyrillicOrSymbols {
             nextBarButton.isEnabled = false
             return false
         }
