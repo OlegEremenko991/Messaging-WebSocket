@@ -14,10 +14,10 @@ extension MessagingVC: WebSocketDelegate {
     func didReceive(event: WebSocketEvent, client: WebSocket) {
         switch event {
         case .connected(let headers):
-            isConnected = true
+//            isConnected = true
             print("websocket is connected: \(headers)")
         case .disconnected(let reason, let code):
-            isConnected = false
+//            isConnected = false
             socket.disconnect()
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
@@ -33,10 +33,10 @@ extension MessagingVC: WebSocketDelegate {
         case .reconnectSuggested(_):
             break
         case .cancelled:
-            isConnected = false
+//            isConnected = false
             print("Disconnected manually")
         case .error(let error):
-            isConnected = false
+//            isConnected = false
             handleError(error)
         }
     }

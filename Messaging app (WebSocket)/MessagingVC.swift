@@ -21,9 +21,7 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
     var username = ""
 
     var socket: WebSocket!
-    var isConnected = false
-    
-    let server = WebSocketServer()
+//    var isConnected = false
     
     var messageArray: [Message] = []
     
@@ -38,14 +36,15 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
         messageTableView.addGestureRecognizer(tapGesture)
         
-        
     }
+    
     deinit {
       socket.disconnect()
       socket.delegate = nil
     }
     
-    //MARK: Анимация текстфилда вместе с движением клавиатуры
+    //MARK: Анимация текстфилда
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
@@ -89,7 +88,8 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // Отправляем сообщение: создаем словарь и преобразовываем его в строку для отправки
+    //MARK: Отправка сообщений
+    // создаем словарь и преобразовываем его в строку для отправки
     fileprivate func sendMessage(_ message: String) {
         let dictToSend = ["text": "\(message)"]
         let encoder = JSONEncoder()
@@ -106,6 +106,7 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
         messageTextfield.text = ""
     }
     
+    //MARK: Получение сообщений
     func messageRecieved(jsonMessage: String){
         guard let data = jsonMessage.data(using: .utf8),
             let json = try? JSON(data: data) else {
@@ -116,16 +117,6 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
         let testMessage = Message(name: resultName, text: resultText)
         messageArray.append(testMessage)
         messageTableView.reloadData()
-    }
-    
-    @IBAction func connectionPressed(_ sender: UIBarButtonItem) {
-        if isConnected {
-            sender.title = "Connect"
-            socket.disconnect()
-        } else {
-            sender.title = "Disconnect"
-            socket.connect()
-        }
     }
 }
 
