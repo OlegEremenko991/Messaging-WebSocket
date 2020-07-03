@@ -36,6 +36,8 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
         messageTableView.addGestureRecognizer(tapGesture)
         
+        // По умолчанию кнопка серая
+        sendButton.isEnabled = false
     }
     
     deinit {
@@ -84,6 +86,14 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         UIView.animate(withDuration: 0.5) {
             self.textBottomConstraint.constant = 0
+            self.view.layoutIfNeeded()
+            self.sendButton.isEnabled = false
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.sendButton.isEnabled = true
             self.view.layoutIfNeeded()
         }
     }
