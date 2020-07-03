@@ -9,7 +9,6 @@
 import Foundation
 
 extension String {
-
     var isCyrillic: Bool {
         let upper = "АБВГДЕËЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
         let lower = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
@@ -21,4 +20,3 @@ extension String {
     }
 }
 
-// привет!

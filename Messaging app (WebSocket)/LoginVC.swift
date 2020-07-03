@@ -53,7 +53,6 @@ extension LoginVC: UITextFieldDelegate {
             nextBarButton.isEnabled = false
             return false
         }
-
         return true
     }
 }

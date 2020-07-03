@@ -17,6 +17,3 @@ class Message {
         self.text = text
     }
 }
-/*
- {"created":"2020-07-03T10:05:17.275966489Z","name":"sUser","text":"some text"}
- */
