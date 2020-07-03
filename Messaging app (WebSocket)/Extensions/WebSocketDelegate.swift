@@ -22,8 +22,6 @@ extension MessagingVC: WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
             messageRecieved(jsonMessage: string)
-            messageTableView.reloadData()
-            
         case .binary(let data):
             print("Received data: \(data.count)")
         case .ping(_):

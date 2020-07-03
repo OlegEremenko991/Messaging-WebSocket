@@ -30,8 +30,8 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=" + "\(username)")!))
-        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=sUser")!))
+        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=" + "\(username)")!))
+//        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=sUser")!))
         socket.delegate = self
         socket.connect()
         
@@ -66,7 +66,7 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
     
     // Отправляем сообщение: создаем словарь и преобразовываем его в строку для отправки
     fileprivate func sendMessage(_ message: String) {
-        let dictToSend = ["name": "\(username)", "text": "\(message)"]
+        let dictToSend = ["text": "\(message)"]
         let encoder = JSONEncoder()
         guard let jsonData = try? encoder.encode(dictToSend),
             let jsonString = String(data: jsonData, encoding: .utf8) else {
@@ -82,14 +82,15 @@ class MessagingVC: UIViewController, UITextFieldDelegate {
     }
     
     func messageRecieved(jsonMessage: String){
-        if let data = jsonMessage.data(using: .utf8) {
-            if let json = try? JSON(data: data) {
-                let resultName = json["name"].stringValue
-                let resultText = json["text"].stringValue
-                let testMessage = Message(name: resultName, text: resultText)
-                messageArray.append(testMessage)
-            }
+        guard let data = jsonMessage.data(using: .utf8),
+            let json = try? JSON(data: data) else {
+                return
         }
+        let resultName = json["name"].stringValue
+        let resultText = json["text"].stringValue
+        let testMessage = Message(name: resultName, text: resultText)
+        messageArray.append(testMessage)
+        messageTableView.reloadData()
     }
     
     @IBAction func connectionPressed(_ sender: UIBarButtonItem) {

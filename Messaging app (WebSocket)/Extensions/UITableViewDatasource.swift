@@ -17,11 +17,9 @@ extension MessagingVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! TableViewCell
         cell.messageBody?.text = messageArray[indexPath.row].text
         cell.senderUsername?.text = messageArray[indexPath.row].name
-        
-        if cell.messageBody.text == username {
-            cell.messageBody.backgroundColor = .cyan
-        } else {
-            cell.messageBody.backgroundColor = .secondarySystemBackground
+                
+        if (cell.senderUsername.text!.isEmpty) {
+            cell.senderUsername.text = "System message"
         }
         return cell
     }
