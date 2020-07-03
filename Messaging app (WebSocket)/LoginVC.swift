@@ -38,20 +38,3 @@ class LoginVC: UIViewController {
         }
     }
 }
-
-extension LoginVC: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let char = string.cString(using: String.Encoding.utf8)!
-        let isBackSpace = strcmp(char, "\\b")
-        
-        if (isBackSpace == -92) {
-            return true
-        }
-        
-        if string.isCyrillicOrSymbols {
-            nextBarButton.isEnabled = false
-            return false
-        }
-        return true
-    }
-}
