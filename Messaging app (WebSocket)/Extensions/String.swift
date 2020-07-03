@@ -12,7 +12,7 @@ extension String {
     var isCyrillicOrSymbols: Bool {
         let upper = "АБВГДЕËЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
         let lower = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-        let forbiddenSymbols = "%^{}'<>`"
+        let forbiddenSymbols = "%^{}'<>` " // including " "
 
         for c in self.map({ String($0) }) {
             if !upper.contains(c) && !lower.contains(c) && !forbiddenSymbols.contains(c) { return false }

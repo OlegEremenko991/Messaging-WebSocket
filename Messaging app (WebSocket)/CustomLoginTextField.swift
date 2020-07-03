@@ -9,7 +9,6 @@
 import UIKit
 
 class CustomLoginTextField: UITextField {
-    
     // Отключаем возможность "Вставлять" текст в поле
     open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if action == #selector(UIResponderStandardEditActions.paste(_:)) {
