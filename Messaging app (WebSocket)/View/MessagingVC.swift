@@ -11,14 +11,14 @@ import Starscream
 import SwiftyJSON
 
 class MessagingVC: UIViewController {
-
+    
+    var username = ""
+    
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textBottomConstraint: NSLayoutConstraint!
-    
-    var username = ""
 
     var socket: WebSocket!
 //    var isConnected = false
@@ -36,8 +36,10 @@ class MessagingVC: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
         messageTableView.addGestureRecognizer(tapGesture)
         
-        // По умолчанию кнопка серая
+        // По умолчанию кнопка для отправки сообщения серая
         sendButton.isEnabled = false
+        
+
     }
     
     deinit {
@@ -49,7 +51,7 @@ class MessagingVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,8 +112,8 @@ class MessagingVC: UIViewController {
         sendAction()
     }
     
-    // создаем словарь и преобразовываем его в строку для отправки
-    fileprivate func sendMessage(_ message: String) {
+//    // создаем словарь и преобразовываем его в строку для отправки
+    func sendMessage(_ message: String) {
         let dictToSend = ["text": "\(message)"]
         let encoder = JSONEncoder()
         guard let jsonData = try? encoder.encode(dictToSend),

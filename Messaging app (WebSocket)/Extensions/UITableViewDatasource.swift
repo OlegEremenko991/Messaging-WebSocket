@@ -21,6 +21,7 @@ extension MessagingVC: UITableViewDataSource {
         if (cell.senderUsername.text!.isEmpty) {
             cell.senderUsername.text = "System message"
         }
+        tableView.scrollToBottom() // автоматически скроллим вниз к последней ячейке
         return cell
     }
 }

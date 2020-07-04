@@ -9,31 +9,25 @@
 import UIKit
 
 class LoginVC: UIViewController {
-    var login = ""
-    var characterSet = CharacterSet.urlQueryAllowed
+
+    var viewModel: LoginViewModel?
         
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var nextBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nextBarButton.isEnabled = false
-        loginTextField.keyboardType = .asciiCapable
+        
+        viewModel = LoginViewModel.init()
+        viewModel?.view = self
+        viewModel?.setUpView()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let vc = segue.destination as? MessagingVC else {
-            return
-        }
-        vc.username = login
+        viewModel?.prepareSegue(segue)
     }
 
     @IBAction func loginChanged(_ sender: UITextField) {
-        if let _ = sender.text!.rangeOfCharacter(from: characterSet){
-            nextBarButton.isEnabled = true
-            login = sender.text!
-        } else {
-            nextBarButton.isEnabled = false
-        }
+        viewModel?.checkLogin(sender)
     }
 }
