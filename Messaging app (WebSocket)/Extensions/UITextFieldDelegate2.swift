@@ -9,9 +9,9 @@
 import UIKit
 
 extension MessagingVC: UITextFieldDelegate {
-    // Отправка сообщения по нажатию Enter в текстфилде
+    // Sending message on "Enter" button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        sendAction()
+        viewModel?.sendAction()
         return true
     }
 }

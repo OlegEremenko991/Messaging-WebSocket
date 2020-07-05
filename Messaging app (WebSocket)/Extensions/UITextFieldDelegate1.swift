@@ -9,15 +9,15 @@
 import UIKit
 
 extension LoginVC: UITextFieldDelegate {
-    // Разрешаем ввод в текстфилде строго по маске
+    // Check text field and replace invalid characters
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 20
         do {
-            // Задаем маску и проверяем текстфилд, запрещаем вводить другие символы/буквы
+            
             let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: [])
             if regex.firstMatch(in: string, options: [], range: NSMakeRange(0, string.count)) != nil { return false }
            
-            // Проверяем количество символов в текстфилде и удаляем лишние
+            // remove excess characters
             if range.location > maxLength - 1 {
                 textField.text?.removeLast()
             }
@@ -28,7 +28,7 @@ extension LoginVC: UITextFieldDelegate {
         return true
     }
     
-    // Переходим на второй экран при нажатии enter в текстфилде
+    // Go to the second screen on "Enter" button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text!.isEmpty {
             return false
