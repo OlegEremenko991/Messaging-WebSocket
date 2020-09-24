@@ -182,7 +182,8 @@ extension MessagingVC: UITableViewDataSource {
             cell.senderUsername.textColor = .red
         }
         
-        tableView.scrollToBottom() // scroll to the lowest cell
+        // Scroll to the lowest cell
+        tableView.scrollToBottom()
         
         return cell
     }
