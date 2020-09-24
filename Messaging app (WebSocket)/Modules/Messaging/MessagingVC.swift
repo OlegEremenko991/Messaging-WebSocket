@@ -99,17 +99,13 @@ final class MessagingVC: UIViewController {
         messageTableView.reloadData()
     }
     
-// MARK: Public methods
-    
-    // Text field animated moves
-        
-    @objc func keyboardWillShow(notification: Notification) {
+    @objc private func keyboardWillShow(notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             var newHeight: CGFloat
-            let duration:TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let duration: TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
             let animationCurveRawNSN = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+            let animationCurve: UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
             if #available(iOS 11.0, *) {
                 newHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
             } else {
@@ -122,29 +118,11 @@ final class MessagingVC: UIViewController {
             })
         }
 
-        
     }
     
     // Processing tap on the table view to bring text field down
-    @objc func tableViewTapped(){
+    @objc private func tableViewTapped(){
         messageTextfield.endEditing(true)
-    }
-    
-    // Bring text field down if user ended typing (tap on table view, for example)
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.5) {
-            self.textBottomConstraint.constant = 0
-            self.view.layoutIfNeeded()
-            self.sendButton.isEnabled = false
-        }
-    }
-    
-    // Bring text field up if user tapped on it
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.5) {
-            self.sendButton.isEnabled = true
-            self.view.layoutIfNeeded()
-        }
     }
     
 // MARK: IBActions
@@ -206,6 +184,23 @@ extension MessagingVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendAction()
         return true
+    }
+    
+    // Bring text field down if user ended typing (tap on table view, for example)
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.textBottomConstraint.constant = 0
+            self.view.layoutIfNeeded()
+            self.sendButton.isEnabled = false
+        }
+    }
+    
+    // Bring text field up if user tapped on it
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.sendButton.isEnabled = true
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
