@@ -70,6 +70,7 @@ final class MessagingVC: UIViewController {
     
     // Main method for sending messages. Create a dictionary and transform it to a JSON-string for further sending
     private func sendMessage(_ message: String) {
+        guard message != "" else { return }
         let dictToSend = ["text": "\(message)"]
         let encoder = JSONEncoder()
         guard let jsonData = try? encoder.encode(dictToSend),
