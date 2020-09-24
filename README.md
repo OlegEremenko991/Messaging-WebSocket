@@ -6,7 +6,7 @@ A small app with Websocket for Tada.team.
 2. Send messages to the chat
 3. View all incoming messages in the chat with auto-scrolling enabled
 
-## Screenshots
+## Demo
 
 [Link to google drive](https://drive.google.com/drive/folders/1vxpwZyeXWBhwyAfp2b2YSEP7ugedIqFY?usp=sharing)
 
