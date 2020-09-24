@@ -1,7 +1,5 @@
 # Messaging app
-* Made for Tada.team
-* Uses websocket
-* MVVM pattern
+Test task with Websocket for Tada.team.
 
 ## What you can do with this app
 1. Login to the chat (only latin letters and numbers allowed, no spaces, symbols or cyrillic letters, maximum 20 characters)
