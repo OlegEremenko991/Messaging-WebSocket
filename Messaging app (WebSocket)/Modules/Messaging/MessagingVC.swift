@@ -21,7 +21,6 @@ final class MessagingVC: UIViewController {
 
 // MARK: Public properties
     
-    var viewModel: MessagingViewModel?
     var socket: WebSocket!
     var messageArray: [Message] = []
     var username = ""
@@ -34,27 +33,69 @@ final class MessagingVC: UIViewController {
     }
     
     deinit {
-        viewModel?.deinitView()
+        socket.disconnect()
+        socket.delegate = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.vcWillAppear()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name:  UIResponder.keyboardWillShowNotification, object: nil )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel?.vcWillDisappear()
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     
 // MARK: Private methods
 
     private func setupView() {
-        viewModel = MessagingViewModel.init()
-        viewModel?.view = self
-        viewModel?.setUpView()
-        viewModel?.setUpSocket()
+        
+        sendButton.isEnabled = false // "Send" button is grey by default
+        
+        // Processing tap on the table view to bring down text field and keyboard
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(tableViewTapped))
+        messageTableView.addGestureRecognizer(tapGesture)
+    
+        setupSocket()
+    }
+    
+    private func setupSocket() {
+        socket = WebSocket(request: URLRequest(url: URL(string: "ws://pm.tada.team/ws?name=" + "\(username)")!))
+        socket.delegate = self
+        socket.connect()
+    }
+    
+    // Main method for sending messages. Create a dictionary and transform it to a JSON-string for further sending
+    private func sendMessage(_ message: String) {
+        let dictToSend = ["text": "\(message)"]
+        let encoder = JSONEncoder()
+        guard let jsonData = try? encoder.encode(dictToSend),
+            let jsonString = String(data: jsonData, encoding: .utf8) else {
+                return
+        }
+        socket.write(string: jsonString)
+    }
+    
+    // Perform sending messages
+    private func sendAction() {
+        messageTextfield.endEditing(false)
+        sendMessage(messageTextfield.text!)
+        messageTextfield.text = ""
+    }
+    
+    // Recieving messages
+    private func messageRecieved(jsonMessage: String){
+        guard let data = jsonMessage.data(using: .utf8),
+            let json = try? JSON(data: data) else {
+                return
+        }
+        let resultName = json["name"].stringValue
+        let resultText = json["text"].stringValue
+        let testMessage = Message(name: resultName, text: resultText)
+        messageArray.append(testMessage)
+        messageTableView.reloadData()
     }
     
 // MARK: Public methods
@@ -62,26 +103,55 @@ final class MessagingVC: UIViewController {
     // Text field animated moves
         
     @objc func keyboardWillShow(notification: Notification) {
-        viewModel?.vcKeyboardWillShow(notification)
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            var newHeight: CGFloat
+            let duration:TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+            if #available(iOS 11.0, *) {
+                newHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+            } else {
+                newHeight = keyboardFrame.cgRectValue.height
+            }
+            let keyboardHeight = newHeight
+            UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve, animations: {
+                self.textBottomConstraint.constant = keyboardHeight
+                self.view.layoutIfNeeded()
+            })
+        }
+
+        
     }
     
+    // Processing tap on the table view to bring text field down
     @objc func tableViewTapped(){
-        viewModel?.messageEndEditing()
+        messageTextfield.endEditing(true)
     }
     
+    // Bring text field down if user ended typing (tap on table view, for example)
     func textFieldDidEndEditing(_ textField: UITextField) {
-        viewModel?.messageDidEndEditing()
+        UIView.animate(withDuration: 0.5) {
+            self.textBottomConstraint.constant = 0
+            self.view.layoutIfNeeded()
+            self.sendButton.isEnabled = false
+        }
     }
     
+    // Bring text field up if user tapped on it
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        viewModel?.messageDidBeginEditing()
+        UIView.animate(withDuration: 0.5) {
+            self.sendButton.isEnabled = true
+            self.view.layoutIfNeeded()
+        }
     }
     
 // MARK: IBActions
     
     @IBAction func sendPressed(_ sender: UIButton) {
-        viewModel?.sendAction()
+        sendAction()
     }
+    
 }
 
 // MARK: UITableViewDataSource
@@ -129,7 +199,7 @@ extension MessagingVC: UITextFieldDelegate {
     
     // Sending message on "Enter" button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        viewModel?.sendAction()
+        sendAction()
         return true
     }
 }
@@ -146,7 +216,7 @@ extension MessagingVC: WebSocketDelegate {
             socket.disconnect()
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
-            viewModel?.messageRecieved(jsonMessage: string)
+            messageRecieved(jsonMessage: string)
         case .binary(let data):
             print("Received data: \(data.count)")
         case .ping(_):
