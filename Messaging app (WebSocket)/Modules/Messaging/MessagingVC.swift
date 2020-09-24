@@ -23,6 +23,7 @@ final class MessagingVC: UIViewController {
     
     var socket: WebSocket!
     var messageArray: [Message] = []
+    var displayedName = ""
     var username = ""
     
 // MARK: Lifecycle
@@ -164,15 +165,18 @@ extension MessagingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! MessageCell
+        
         cell.messageBody?.text = messageArray[indexPath.row].text
         cell.senderUsername?.text = messageArray[indexPath.row].name
         
+        // Setup "system message" if name is nil
         if cell.senderUsername.text!.isEmpty {
             cell.senderUsername.text = "System message"
             cell.senderUsername.textColor = .gray
         }
         
-        if cell.senderUsername.text! == username {
+        // Setup name color
+        if cell.senderUsername.text == displayedName {
             cell.senderUsername.textColor = .blue
         } else if cell.senderUsername.text != "System message" {
             cell.senderUsername.textColor = .red
@@ -217,6 +221,7 @@ extension MessagingVC: WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
             messageRecieved(jsonMessage: string)
+            print(string)
         case .binary(let data):
             print("Received data: \(data.count)")
         case .ping(_):

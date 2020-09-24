@@ -58,7 +58,7 @@ extension LoginVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 20
         do {
-            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: [])
+            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9 ].*", options: [])
             if regex.firstMatch(in: string, options: [], range: NSMakeRange(0, string.count)) != nil { return false }
            
             // remove excess characters

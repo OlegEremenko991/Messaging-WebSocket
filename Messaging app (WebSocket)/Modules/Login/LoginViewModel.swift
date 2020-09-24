@@ -37,7 +37,8 @@ final class LoginViewModel {
     
     func prepareSegue(_ segue: UIStoryboardSegue){
         if let vc = segue.destination as? MessagingVC {
-            vc.username = login
+            vc.username = login.withReplacedCharacters(" ", by: "%20")
+            vc.displayedName = login
         }
     }
 }
