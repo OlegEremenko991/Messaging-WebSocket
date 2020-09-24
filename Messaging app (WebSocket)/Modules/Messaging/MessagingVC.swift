@@ -96,9 +96,16 @@ extension MessagingVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! MessageCell
         cell.messageBody?.text = messageArray[indexPath.row].text
         cell.senderUsername?.text = messageArray[indexPath.row].name
-                
+        
         if cell.senderUsername.text!.isEmpty {
             cell.senderUsername.text = "System message"
+            cell.senderUsername.textColor = .gray
+        }
+        
+        if cell.senderUsername.text! == username {
+            cell.senderUsername.textColor = .blue
+        } else if cell.senderUsername.text != "System message" {
+            cell.senderUsername.textColor = .red
         }
         
         tableView.scrollToBottom() // scroll to the lowest cell

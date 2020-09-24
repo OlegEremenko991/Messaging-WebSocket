@@ -30,6 +30,11 @@ final class LoginVC: UIViewController {
         viewModel?.prepareSegue(segue)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loginTextField.text = ""
+    }
+    
 // MARK: Private methods
 
     private func setupView() {
