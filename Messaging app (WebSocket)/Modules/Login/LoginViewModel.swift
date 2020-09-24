@@ -8,12 +8,19 @@
 
 import UIKit
 
-class LoginViewModel {
+final class LoginViewModel {
+    
+// MARK: Public properties
     
     weak var view: LoginVC?
-    var login = ""
-    var characterSet = CharacterSet.urlQueryAllowed
     
+// MARK: Private properties
+
+    private var login = ""
+    private var characterSet = CharacterSet.urlQueryAllowed
+    
+// MARK: Public methods
+
     func setUpView(){
         view?.nextBarButton.isEnabled = false
         view?.loginTextField.keyboardType = .asciiCapable

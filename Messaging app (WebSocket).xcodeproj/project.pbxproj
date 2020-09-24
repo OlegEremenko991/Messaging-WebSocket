@@ -16,16 +16,11 @@
 		6750E6D124ADBF1300F25B51 /* MessagingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D024ADBF1300F25B51 /* MessagingVC.swift */; };
 		6750E6D324ADC22B00F25B51 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D224ADC22B00F25B51 /* LoginVC.swift */; };
 		6750E6D524ADC46300F25B51 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D424ADC46300F25B51 /* MessageModel.swift */; };
-		6750E6D724ADC84200F25B51 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D624ADC84200F25B51 /* TableViewCell.swift */; };
+		6750E6D724ADC84200F25B51 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D624ADC84200F25B51 /* MessageCell.swift */; };
 		6750E6DA24ADCECA00F25B51 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 6750E6D924ADCECA00F25B51 /* Starscream */; };
 		6750E6E324AE378500F25B51 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 6750E6E224AE378500F25B51 /* SwiftyJSON */; };
-		6750E6E624AE4AB000F25B51 /* UITableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6E524AE4AB000F25B51 /* UITableViewDatasource.swift */; };
-		6750E6E824AE4B0400F25B51 /* UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6E724AE4B0400F25B51 /* UITableViewDelegate.swift */; };
-		6750E6EA24AE4B4A00F25B51 /* WebSocketDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6E924AE4B4A00F25B51 /* WebSocketDelegate.swift */; };
 		6750E6EE24AF436700F25B51 /* CustomLoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6ED24AF436700F25B51 /* CustomLoginTextField.swift */; };
-		6750E6F024AF4B2C00F25B51 /* UITextFieldDelegate1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6EF24AF4B2C00F25B51 /* UITextFieldDelegate1.swift */; };
-		6750E6F424AF7DB600F25B51 /* UITextFieldDelegate2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6F324AF7DB600F25B51 /* UITextFieldDelegate2.swift */; };
-		6750E6FA24B0767700F25B51 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6F924B0767700F25B51 /* UITableView.swift */; };
+		6750E6FA24B0767700F25B51 /* UITableView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6F924B0767700F25B51 /* UITableView_Extension.swift */; };
 		6750E6FF24B07C1900F25B51 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6FE24B07C1900F25B51 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,14 +36,9 @@
 		6750E6D024ADBF1300F25B51 /* MessagingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingVC.swift; sourceTree = "<group>"; };
 		6750E6D224ADC22B00F25B51 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		6750E6D424ADC46300F25B51 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
-		6750E6D624ADC84200F25B51 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		6750E6E524AE4AB000F25B51 /* UITableViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewDatasource.swift; sourceTree = "<group>"; };
-		6750E6E724AE4B0400F25B51 /* UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewDelegate.swift; sourceTree = "<group>"; };
-		6750E6E924AE4B4A00F25B51 /* WebSocketDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketDelegate.swift; sourceTree = "<group>"; };
+		6750E6D624ADC84200F25B51 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		6750E6ED24AF436700F25B51 /* CustomLoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginTextField.swift; sourceTree = "<group>"; };
-		6750E6EF24AF4B2C00F25B51 /* UITextFieldDelegate1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldDelegate1.swift; sourceTree = "<group>"; };
-		6750E6F324AF7DB600F25B51 /* UITextFieldDelegate2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldDelegate2.swift; sourceTree = "<group>"; };
-		6750E6F924B0767700F25B51 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		6750E6F924B0767700F25B51 /* UITableView_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView_Extension.swift; sourceTree = "<group>"; };
 		6750E6FE24B07C1900F25B51 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,16 +55,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		673404AD24B1B91600D9D77D /* Supporting files */ = {
-			isa = PBXGroup;
-			children = (
-				6750E6BC24ADBA1800F25B51 /* AppDelegate.swift */,
-				6750E6BE24ADBA1800F25B51 /* SceneDelegate.swift */,
-				6750E6ED24AF436700F25B51 /* CustomLoginTextField.swift */,
-			);
-			path = "Supporting files";
-			sourceTree = "<group>";
-		};
 		6750E6B024ADBA1800F25B51 = {
 			isa = PBXGroup;
 			children = (
@@ -94,11 +74,10 @@
 		6750E6BB24ADBA1800F25B51 /* Messaging app (WebSocket) */ = {
 			isa = PBXGroup;
 			children = (
-				673404AD24B1B91600D9D77D /* Supporting files */,
+				67D840A6251C883200599B3E /* App */,
+				67D840B0251C8DD300599B3E /* Modules */,
 				6750E6FB24B07BC600F25B51 /* Model */,
-				6750E6FD24B07BD700F25B51 /* View */,
-				6750E6FC24B07BD100F25B51 /* ViewModel */,
-				6750E6E424AE4A9900F25B51 /* Extensions */,
+				6750E6E424AE4A9900F25B51 /* Support */,
 				6750E6C224ADBA1800F25B51 /* Main.storyboard */,
 				6750E6C524ADBA1A00F25B51 /* Assets.xcassets */,
 				6750E6C724ADBA1A00F25B51 /* LaunchScreen.storyboard */,
@@ -107,17 +86,13 @@
 			path = "Messaging app (WebSocket)";
 			sourceTree = "<group>";
 		};
-		6750E6E424AE4A9900F25B51 /* Extensions */ = {
+		6750E6E424AE4A9900F25B51 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				6750E6E524AE4AB000F25B51 /* UITableViewDatasource.swift */,
-				6750E6E724AE4B0400F25B51 /* UITableViewDelegate.swift */,
-				6750E6E924AE4B4A00F25B51 /* WebSocketDelegate.swift */,
-				6750E6EF24AF4B2C00F25B51 /* UITextFieldDelegate1.swift */,
-				6750E6F324AF7DB600F25B51 /* UITextFieldDelegate2.swift */,
-				6750E6F924B0767700F25B51 /* UITableView.swift */,
+				6750E6F924B0767700F25B51 /* UITableView_Extension.swift */,
+				6750E6ED24AF436700F25B51 /* CustomLoginTextField.swift */,
 			);
-			path = Extensions;
+			path = Support;
 			sourceTree = "<group>";
 		};
 		6750E6FB24B07BC600F25B51 /* Model */ = {
@@ -128,23 +103,41 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		6750E6FC24B07BD100F25B51 /* ViewModel */ = {
+		67D840A6251C883200599B3E /* App */ = {
 			isa = PBXGroup;
 			children = (
-				6750E6FE24B07C1900F25B51 /* LoginViewModel.swift */,
-				673404AB24B1A97F00D9D77D /* MessagingViewModel.swift */,
+				6750E6BC24ADBA1800F25B51 /* AppDelegate.swift */,
+				6750E6BE24ADBA1800F25B51 /* SceneDelegate.swift */,
 			);
-			path = ViewModel;
+			path = App;
 			sourceTree = "<group>";
 		};
-		6750E6FD24B07BD700F25B51 /* View */ = {
+		67D840B0251C8DD300599B3E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				67D840B1251C8DE100599B3E /* Login */,
+				67D840B2251C8DE900599B3E /* Messaging */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		67D840B1251C8DE100599B3E /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				6750E6D224ADC22B00F25B51 /* LoginVC.swift */,
-				6750E6D024ADBF1300F25B51 /* MessagingVC.swift */,
-				6750E6D624ADC84200F25B51 /* TableViewCell.swift */,
+				6750E6FE24B07C1900F25B51 /* LoginViewModel.swift */,
 			);
-			path = View;
+			path = Login;
+			sourceTree = "<group>";
+		};
+		67D840B2251C8DE900599B3E /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				6750E6D024ADBF1300F25B51 /* MessagingVC.swift */,
+				673404AB24B1A97F00D9D77D /* MessagingViewModel.swift */,
+				6750E6D624ADC84200F25B51 /* MessageCell.swift */,
+			);
+			path = Messaging;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,19 +220,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6750E6D524ADC46300F25B51 /* MessageModel.swift in Sources */,
-				6750E6F424AF7DB600F25B51 /* UITextFieldDelegate2.swift in Sources */,
 				673404AC24B1A97F00D9D77D /* MessagingViewModel.swift in Sources */,
 				6750E6D324ADC22B00F25B51 /* LoginVC.swift in Sources */,
-				6750E6E624AE4AB000F25B51 /* UITableViewDatasource.swift in Sources */,
 				6750E6D124ADBF1300F25B51 /* MessagingVC.swift in Sources */,
-				6750E6D724ADC84200F25B51 /* TableViewCell.swift in Sources */,
+				6750E6D724ADC84200F25B51 /* MessageCell.swift in Sources */,
 				6750E6FF24B07C1900F25B51 /* LoginViewModel.swift in Sources */,
 				6750E6BD24ADBA1800F25B51 /* AppDelegate.swift in Sources */,
-				6750E6E824AE4B0400F25B51 /* UITableViewDelegate.swift in Sources */,
 				6750E6BF24ADBA1800F25B51 /* SceneDelegate.swift in Sources */,
-				6750E6EA24AE4B4A00F25B51 /* WebSocketDelegate.swift in Sources */,
-				6750E6FA24B0767700F25B51 /* UITableView.swift in Sources */,
-				6750E6F024AF4B2C00F25B51 /* UITextFieldDelegate1.swift in Sources */,
+				6750E6FA24B0767700F25B51 /* UITableView_Extension.swift in Sources */,
 				6750E6EE24AF436700F25B51 /* CustomLoginTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

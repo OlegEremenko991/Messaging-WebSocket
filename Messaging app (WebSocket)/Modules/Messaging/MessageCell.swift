@@ -8,20 +8,21 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+final class MessageCell: UITableViewCell {
+
+// MARK: IBOutlets
 
     @IBOutlet weak var senderUsername: UILabel!
     @IBOutlet weak var messageBody: UILabel!
     
+// MARK: Lifecycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

@@ -10,12 +10,15 @@ import UIKit
 import Starscream
 import SwiftyJSON
 
-class MessagingViewModel {
+final class MessagingViewModel {
     
+// MARK: Public properties
+
     weak var view: MessagingVC?
     
-    //MARK: Setting up view
+//MARK: Public methods
     
+    // Setting up view
     func setUpView(){
         view?.sendButton.isEnabled = false // "Send" button is grey by default
         
@@ -35,7 +38,7 @@ class MessagingViewModel {
         view?.socket.delegate = nil
     }
     
-    //MARK: Text field animated moves, keyboard methods
+    // Text field animated moves, keyboard methods
     
     func vcWillAppear(){
         NotificationCenter.default.addObserver(view!, selector: #selector(view?.keyboardWillShow(notification:)), name:  UIResponder.keyboardWillShowNotification, object: nil )
@@ -65,7 +68,7 @@ class MessagingViewModel {
         }
     }
     
-    //MARK: Text field methods and sending messages
+    // Text field methods and sending messages
     
     // Processing tap on the table view to bring text field down
     func messageEndEditing(){
@@ -107,7 +110,7 @@ class MessagingViewModel {
         view?.messageTextfield.text = ""
     }
 
-    //MARK: Recieving messages
+    // Recieving messages
     
     func messageRecieved(jsonMessage: String){
         guard let data = jsonMessage.data(using: .utf8),
