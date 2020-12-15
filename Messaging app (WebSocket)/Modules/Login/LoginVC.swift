@@ -12,8 +12,8 @@ final class LoginVC: UIViewController {
 
 // MARK: IBOutlets
 
-    @IBOutlet weak var loginTextField: UITextField!
-    @IBOutlet weak var nextBarButton: UIBarButtonItem!
+    @IBOutlet private weak var loginTextField: UITextField!
+    @IBOutlet private weak var nextBarButton: UIBarButtonItem!
     
 // MARK: Public properties
 
@@ -33,6 +33,7 @@ final class LoginVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         loginTextField.text = ""
+        changeButtonState(enabled: false)
     }
     
 // MARK: Private methods
@@ -43,11 +44,15 @@ final class LoginVC: UIViewController {
         viewModel?.setUpView()
     }
 
+    // MARK: Public methods
+
+    func changeButtonState(enabled: Bool) { nextBarButton.isEnabled = enabled }
+
+    func setupTextField() { loginTextField.keyboardType = .asciiCapable }
+
 // MARK: IBActions
 
-    @IBAction func loginChanged(_ sender: UITextField) {
-        viewModel?.checkLogin(sender)
-    }
+    @IBAction func loginChanged(_ sender: UITextField) { viewModel?.checkLogin(sender) }
 }
 
 // MARK: UITextFieldDelegate
@@ -62,9 +67,7 @@ extension LoginVC: UITextFieldDelegate {
             if regex.firstMatch(in: string, options: [], range: NSMakeRange(0, string.count)) != nil { return false }
            
             // remove excess characters
-            if range.location > maxLength - 1 {
-                textField.text?.removeLast()
-            }
+            if range.location > maxLength - 1 { textField.text?.removeLast() }
         } catch {
             print("ERROR")
         }
@@ -73,9 +76,7 @@ extension LoginVC: UITextFieldDelegate {
     
     // Go to the second screen on "Enter" button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text!.isEmpty {
-            return false
-        }
+        if textField.text!.isEmpty { return false }
         performSegue(withIdentifier: "loginEntered", sender: self)
         return true
     }

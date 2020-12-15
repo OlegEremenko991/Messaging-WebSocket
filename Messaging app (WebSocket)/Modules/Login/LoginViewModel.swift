@@ -22,22 +22,22 @@ final class LoginViewModel {
 // MARK: Public methods
 
     func setUpView(){
-        view?.nextBarButton.isEnabled = false
-        view?.loginTextField.keyboardType = .asciiCapable
+        view?.changeButtonState(enabled: false)
+        view?.setupTextField()
     }
     
     func checkLogin(_ sender: UITextField){
         if let _ = sender.text!.rangeOfCharacter(from: characterSet){
-            view!.nextBarButton.isEnabled = true
+            view!.changeButtonState(enabled: true)
             login = sender.text!
         } else {
-            view!.nextBarButton.isEnabled = false
+            view!.changeButtonState(enabled: false)
         }
     }
     
     func prepareSegue(_ segue: UIStoryboardSegue){
         if let vc = segue.destination as? MessagingVC {
-            vc.username = login.withReplacedCharacters(" ", by: "%20")
+            vc.username = login.replacingOccurrences(of: " ", with: "%20")
             vc.displayedName = login
         }
     }
