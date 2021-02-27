@@ -14,7 +14,7 @@ final class MessagingVC: UIViewController {
     // MARK: - IBOutlets
 
     @IBOutlet private weak var messageTableView: UITableView! {
-        didSet { messageTableView.tableFooterView = UIView() }
+        didSet { messageTableView.separatorStyle = .none }
     }
 
     @IBOutlet private weak var messageTextfield: UITextField!
@@ -131,15 +131,18 @@ final class MessagingVC: UIViewController {
 extension MessagingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        messageArray.count
+        messageArray.count > 0 ? messageArray.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! MessageCell
+        if messageArray.isEmpty {
+            cell.setupCell(userName: "", message: "No messages to show", displayedName: displayedName)
+        } else {
+            let item = messageArray[indexPath.row]
+            cell.setupCell(userName: item.name, message: item.text, displayedName: displayedName)
+        }
 
-        let item = messageArray[indexPath.row]
-        cell.setupCell(userName: item.name, message: item.text, displayedName: displayedName)
-        
         return cell
     }
 }

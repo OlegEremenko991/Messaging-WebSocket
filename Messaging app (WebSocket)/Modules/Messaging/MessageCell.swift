@@ -12,7 +12,7 @@ final class MessageCell: UITableViewCell {
 
     // MARK: - IBOutlets
 
-    @IBOutlet private(set) weak var senderUsername: UILabel!
+    @IBOutlet private weak var senderUsername: UILabel!
     @IBOutlet private weak var messageBody: UILabel!
 
     // MARK: Private properties

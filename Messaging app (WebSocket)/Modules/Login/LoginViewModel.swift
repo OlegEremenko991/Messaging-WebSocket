@@ -13,7 +13,7 @@ final class LoginViewModel {
     // MARK: - Public properties
     
     weak var view: LoginVC?
-    
+
     // MARK: Private properties
 
     private var login = ""
@@ -34,11 +34,13 @@ final class LoginViewModel {
             view!.changeButtonState(enabled: false)
         }
     }
-    
-    func prepareSegue(_ segue: UIStoryboardSegue){
-        if let vc = segue.destination as? MessagingVC {
-            vc.username = login.replacingOccurrences(of: " ", with: "%20")
-            vc.displayedName = login
-        }
+
+    func displayedName() -> String {
+        login
     }
+
+    func userName() -> String {
+        login.replacingOccurrences(of: " ", with: "%20")
+    }
+
 }

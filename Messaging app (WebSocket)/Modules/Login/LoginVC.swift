@@ -27,13 +27,17 @@ final class LoginVC: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        viewModel?.prepareSegue(segue)
+        if let vc = segue.destination as? MessagingVC,
+           let userName = viewModel?.userName(),
+           let displayedName = viewModel?.displayedName() {
+            vc.username = userName
+            vc.displayedName = displayedName
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        loginTextField.text = ""
-        changeButtonState(enabled: false)
+        super.viewWillAppear(animated)
+        resetSession()
     }
     
     // MARK: - Private methods
@@ -42,6 +46,11 @@ final class LoginVC: UIViewController {
         viewModel = LoginViewModel.init()
         viewModel?.view = self
         viewModel?.setUpView()
+    }
+
+    private func resetSession() {
+        loginTextField.text = ""
+        changeButtonState(enabled: false)
     }
 
     // MARK: - Public methods
