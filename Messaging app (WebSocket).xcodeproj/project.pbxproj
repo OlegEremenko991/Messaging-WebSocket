@@ -18,7 +18,6 @@
 		6750E6D724ADC84200F25B51 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6D624ADC84200F25B51 /* MessageCell.swift */; };
 		6750E6DA24ADCECA00F25B51 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 6750E6D924ADCECA00F25B51 /* Starscream */; };
 		6750E6E324AE378500F25B51 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 6750E6E224AE378500F25B51 /* SwiftyJSON */; };
-		6750E6EE24AF436700F25B51 /* CustomLoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6ED24AF436700F25B51 /* CustomLoginTextField.swift */; };
 		6750E6FA24B0767700F25B51 /* UITableView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6F924B0767700F25B51 /* UITableView_Extension.swift */; };
 		6750E6FF24B07C1900F25B51 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6750E6FE24B07C1900F25B51 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +34,6 @@
 		6750E6D224ADC22B00F25B51 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		6750E6D424ADC46300F25B51 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		6750E6D624ADC84200F25B51 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
-		6750E6ED24AF436700F25B51 /* CustomLoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginTextField.swift; sourceTree = "<group>"; };
 		6750E6F924B0767700F25B51 /* UITableView_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView_Extension.swift; sourceTree = "<group>"; };
 		6750E6FE24B07C1900F25B51 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +73,7 @@
 				67D840A6251C883200599B3E /* App */,
 				67D840B0251C8DD300599B3E /* Modules */,
 				6750E6FB24B07BC600F25B51 /* Model */,
-				6750E6E424AE4A9900F25B51 /* Support */,
+				6750E6E424AE4A9900F25B51 /* Extension */,
 				6750E6C224ADBA1800F25B51 /* Main.storyboard */,
 				6750E6C524ADBA1A00F25B51 /* Assets.xcassets */,
 				6750E6C724ADBA1A00F25B51 /* LaunchScreen.storyboard */,
@@ -84,13 +82,12 @@
 			path = "Messaging app (WebSocket)";
 			sourceTree = "<group>";
 		};
-		6750E6E424AE4A9900F25B51 /* Support */ = {
+		6750E6E424AE4A9900F25B51 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				6750E6ED24AF436700F25B51 /* CustomLoginTextField.swift */,
 				6750E6F924B0767700F25B51 /* UITableView_Extension.swift */,
 			);
-			path = Support;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		6750E6FB24B07BC600F25B51 /* Model */ = {
@@ -168,7 +165,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Oleg Eremenko";
 				TargetAttributes = {
 					6750E6B824ADBA1800F25B51 = {
@@ -224,7 +221,6 @@
 				6750E6BD24ADBA1800F25B51 /* AppDelegate.swift in Sources */,
 				6750E6BF24ADBA1800F25B51 /* SceneDelegate.swift in Sources */,
 				6750E6FA24B0767700F25B51 /* UITableView_Extension.swift in Sources */,
-				6750E6EE24AF436700F25B51 /* CustomLoginTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +272,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -300,7 +297,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -336,6 +333,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -354,7 +352,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -11,52 +11,54 @@ import SwiftyJSON
 
 final class MessagingVC: UIViewController {
 
-// MARK: IBOutlets
+    // MARK: - IBOutlets
 
-    @IBOutlet weak var messageTableView: UITableView!
-    @IBOutlet weak var messageTextfield: UITextField!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var messageTableView: UITableView! {
+        didSet { messageTableView.tableFooterView = UIView() }
+    }
 
-// MARK: Public properties
+    @IBOutlet private weak var messageTextfield: UITextField!
+    @IBOutlet private weak var sendButton: UIButton!
+    @IBOutlet private weak var textBottomConstraint: NSLayoutConstraint!
+
+    // MARK: - Public properties
     
     var socket: WebSocket!
     var messageArray: [Message] = []
     var displayedName = ""
     var username = ""
     
-// MARK: Lifecycle
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name:  UIResponder.keyboardWillShowNotification, object: nil )
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
     deinit {
         socket.disconnect()
         socket.delegate = nil
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name:  UIResponder.keyboardWillShowNotification, object: nil )
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    
-// MARK: Private methods
+    // MARK: - Private methods
 
     private func setupView() {
-        
-        sendButton.isEnabled = false // "Send" button is grey by default
+
+        // "Send" button is not enableds by default
+        sendButton.isEnabled = false
         
         // Processing tap on the table view to bring down text field and keyboard
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(tableViewTapped))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
         messageTableView.addGestureRecognizer(tapGesture)
     
         setupSocket()
@@ -68,65 +70,55 @@ final class MessagingVC: UIViewController {
         socket.connect()
     }
     
-    // Main method for sending messages. Create a dictionary and transform it to a JSON-string for further sending
+    /// Creates a dictionary and transform it to a JSON-string for further sending
     private func sendMessage(_ message: String) {
         guard message != "" else { return }
         let dictToSend = ["text": "\(message)"]
-        let encoder = JSONEncoder()
-        guard let jsonData = try? encoder.encode(dictToSend),
-            let jsonString = String(data: jsonData, encoding: .utf8) else {
-                return
-        }
+        guard let jsonData = try? JSONEncoder().encode(dictToSend),
+              let jsonString = String(data: jsonData, encoding: .utf8) else { return }
         socket.write(string: jsonString)
     }
     
-    // Perform sending messages
+    /// Sends messages
     private func sendAction() {
         messageTextfield.endEditing(false)
         sendMessage(messageTextfield.text!)
         messageTextfield.text = ""
     }
     
-    // Recieving messages
+    /// Recieve a message and append it to messageArray
     private func messageRecieved(jsonMessage: String){
         guard let data = jsonMessage.data(using: .utf8),
-            let json = try? JSON(data: data) else {
-                return
-        }
+              let json = try? JSON(data: data) else { return }
         let resultName = json["name"].stringValue
         let resultText = json["text"].stringValue
-        let testMessage = Message(name: resultName, text: resultText)
-        messageArray.append(testMessage)
+        let message = Message(name: resultName, text: resultText)
+        messageArray.append(message)
+
         messageTableView.reloadData()
+        messageTableView.scrollToBottom()
     }
     
     @objc private func keyboardWillShow(notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            var newHeight: CGFloat
-            let duration: TimeInterval = (notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-            let animationCurve: UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
-            if #available(iOS 11.0, *) {
-                newHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
-            } else {
-                newHeight = keyboardFrame.cgRectValue.height
-            }
-            let keyboardHeight = newHeight
-            UIView.animate(withDuration: duration, delay: TimeInterval(0), options: animationCurve, animations: {
-                self.textBottomConstraint.constant = keyboardHeight
+            /// Keyboard height
+            let newHeight: CGFloat = keyboardFrame.cgRectValue.height - view.safeAreaInsets.bottom
+
+            view.layoutIfNeeded()
+            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseInOut, animations: {
+                self.textBottomConstraint.constant = newHeight
                 self.view.layoutIfNeeded()
             })
         }
 
     }
     
-    // Processing tap on the table view to bring text field down
+    /// Brings text field down
     @objc private func tableViewTapped(){
         messageTextfield.endEditing(true)
     }
     
-// MARK: IBActions
+    // MARK: - IBActions
     
     @IBAction func sendPressed(_ sender: UIButton) {
         sendAction()
@@ -134,35 +126,19 @@ final class MessagingVC: UIViewController {
     
 }
 
-// MARK: UITableViewDataSource
+// MARK: - UITableViewDataSource
 
 extension MessagingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messageArray.count
+        messageArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! MessageCell
-        
-        cell.messageBody?.text = messageArray[indexPath.row].text
-        cell.senderUsername?.text = messageArray[indexPath.row].name
-        
-        // Setup "system message" if name is nil
-        if cell.senderUsername.text!.isEmpty {
-            cell.senderUsername.text = "System message"
-            cell.senderUsername.textColor = .gray
-        }
-        
-        // Setup name color
-        if cell.senderUsername.text == displayedName {
-            cell.senderUsername.textColor = .blue
-        } else if cell.senderUsername.text != "System message" {
-            cell.senderUsername.textColor = .red
-        }
-        
-        // Scroll to the lowest cell
-        tableView.scrollToBottom()
+
+        let item = messageArray[indexPath.row]
+        cell.setupCell(userName: item.name, message: item.text, displayedName: displayedName)
         
         return cell
     }
@@ -171,22 +147,15 @@ extension MessagingVC: UITableViewDataSource {
 // MARK: UITableViewDelegate
 
 extension MessagingVC: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 // MARK: UITextFieldDelegate
 
 extension MessagingVC: UITextFieldDelegate {
-    
-    // Sending message on "Enter" button
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        sendAction()
-        return true
-    }
-    
+
     // Bring text field down if user ended typing (tap on table view, for example)
     func textFieldDidEndEditing(_ textField: UITextField) {
         UIView.animate(withDuration: 0.5) {
@@ -195,14 +164,19 @@ extension MessagingVC: UITextFieldDelegate {
             self.sendButton.isEnabled = false
         }
     }
-    
-    // Bring text field up if user tapped on it
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.5) {
-            self.sendButton.isEnabled = true
-            self.view.layoutIfNeeded()
-        }
+
+    // Sending message on "Enter" button
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        sendAction()
+        return true
     }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let stringToCheck = (textField.text! as NSString).replacingCharacters(in: range, with: string) as NSString
+        sendButton.isEnabled = stringToCheck != ""
+        return true
+    }
+
 }
 
 // MARK: WebSocketDelegate
@@ -238,11 +212,11 @@ extension MessagingVC: WebSocketDelegate {
     
     func handleError(_ error: Error?) {
         if let e = error as? WSError {
-            print("websocket encountered an error: \(e.message)")
+            print("websocket encountered a WSError: \(e.message)")
         } else if let e = error {
             print("websocket encountered an error: \(e.localizedDescription)")
         } else {
-            print("websocket encountered an error")
+            print("websocket encountered an unknown error")
         }
     }
 }

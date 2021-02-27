@@ -8,12 +8,7 @@
 
 import Foundation
 
-class Message {
+struct Message {
     var name: String
     var text: String
-    
-    init(name: String, text: String){
-        self.name = name
-        self.text = text
-    }
 }

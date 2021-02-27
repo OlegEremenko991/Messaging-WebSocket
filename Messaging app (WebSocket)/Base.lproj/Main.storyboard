@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H3o-2J-OnV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H3o-2J-OnV">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +25,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login in English" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-OC-nPU" customClass="CustomLoginTextField" customModule="Messaging_app__WebSocket_" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login in English" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="LBR-OC-nPU">
                                         <rect key="frame" x="0.0" y="55.5" width="200" height="34.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="username"/>
@@ -50,7 +49,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login screen" id="ePW-Ba-IRc">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="rE1-TD-q5B">
+                        <barButtonItem key="rightBarButtonItem" title="Enter the chat" id="rE1-TD-q5B">
                             <connections>
                                 <segue destination="ir6-ie-Zyn" kind="show" identifier="loginEntered" id="NXU-AW-xgl"/>
                             </connections>
@@ -173,7 +172,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Tada Chat" id="6Yx-JC-fsy"/>
                     <connections>
-                        <outlet property="heightConstraint" destination="OsF-nU-mAv" id="SFa-FV-hQg"/>
                         <outlet property="messageTableView" destination="gPW-2F-Te2" id="9rR-Gd-h8D"/>
                         <outlet property="messageTextfield" destination="IVc-db-gfb" id="pCN-xv-SsI"/>
                         <outlet property="sendButton" destination="OzC-FH-JHl" id="sgN-bb-2G3"/>

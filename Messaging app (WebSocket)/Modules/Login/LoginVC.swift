@@ -10,16 +10,16 @@ import UIKit
 
 final class LoginVC: UIViewController {
 
-// MARK: IBOutlets
+    // MARK: - IBOutlets
 
     @IBOutlet private weak var loginTextField: UITextField!
     @IBOutlet private weak var nextBarButton: UIBarButtonItem!
     
-// MARK: Public properties
+    // MARK: - Public properties
 
     var viewModel: LoginViewModel?
     
-// MARK: Lifecycle
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ final class LoginVC: UIViewController {
         changeButtonState(enabled: false)
     }
     
-// MARK: Private methods
+    // MARK: - Private methods
 
     private func setupView() {
         viewModel = LoginViewModel.init()
@@ -44,18 +44,19 @@ final class LoginVC: UIViewController {
         viewModel?.setUpView()
     }
 
-    // MARK: Public methods
+    // MARK: - Public methods
 
     func changeButtonState(enabled: Bool) { nextBarButton.isEnabled = enabled }
 
     func setupTextField() { loginTextField.keyboardType = .asciiCapable }
 
-// MARK: IBActions
+    // MARK: - IBActions
 
     @IBAction func loginChanged(_ sender: UITextField) { viewModel?.checkLogin(sender) }
+
 }
 
-// MARK: UITextFieldDelegate
+// MARK: - UITextFieldDelegate
 
 extension LoginVC: UITextFieldDelegate {
     

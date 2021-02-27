@@ -10,16 +10,16 @@ import UIKit
 
 final class LoginViewModel {
     
-// MARK: Public properties
+    // MARK: - Public properties
     
     weak var view: LoginVC?
     
-// MARK: Private properties
+    // MARK: Private properties
 
     private var login = ""
     private var characterSet = CharacterSet.urlQueryAllowed
     
-// MARK: Public methods
+    // MARK: - Public methods
 
     func setUpView(){
         view?.changeButtonState(enabled: false)
