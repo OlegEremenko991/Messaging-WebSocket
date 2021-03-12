@@ -20,11 +20,6 @@ final class LoginViewModel {
     private var characterSet = CharacterSet.urlQueryAllowed
     
     // MARK: - Public methods
-
-    func setUpView(){
-        view?.changeButtonState(enabled: false)
-        view?.setupTextField()
-    }
     
     func checkLogin(_ sender: UITextField){
         if let _ = sender.text!.rangeOfCharacter(from: characterSet){

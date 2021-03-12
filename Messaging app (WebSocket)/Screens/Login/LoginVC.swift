@@ -12,7 +12,10 @@ final class LoginVC: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet private weak var loginTextField: UITextField!
+    @IBOutlet private weak var loginTextField: UITextField! {
+        didSet { loginTextField.keyboardType = .asciiCapable }
+    }
+
     @IBOutlet private weak var nextBarButton: UIBarButtonItem!
     
     // MARK: - Public properties
@@ -27,11 +30,11 @@ final class LoginVC: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? MessagingVC,
+        if let messagingVC = segue.destination as? MessagingVC,
            let userName = viewModel?.userName(),
            let displayedName = viewModel?.displayedName() {
-            vc.username = userName
-            vc.displayedName = displayedName
+            messagingVC.username = userName
+            messagingVC.displayedName = displayedName
         }
     }
     
@@ -43,9 +46,13 @@ final class LoginVC: UIViewController {
     // MARK: - Private methods
 
     private func setupView() {
+        setupViewModel()
+        changeButtonState(enabled: false)
+    }
+
+    private func setupViewModel() {
         viewModel = LoginViewModel.init()
         viewModel?.view = self
-        viewModel?.setUpView()
     }
 
     private func resetSession() {
@@ -56,8 +63,6 @@ final class LoginVC: UIViewController {
     // MARK: - Public methods
 
     func changeButtonState(enabled: Bool) { nextBarButton.isEnabled = enabled }
-
-    func setupTextField() { loginTextField.keyboardType = .asciiCapable }
 
     // MARK: - IBActions
 

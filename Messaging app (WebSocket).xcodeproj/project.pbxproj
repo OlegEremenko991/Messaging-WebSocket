@@ -71,7 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				67D840A6251C883200599B3E /* App */,
-				67D840B0251C8DD300599B3E /* Modules */,
+				67D840B0251C8DD300599B3E /* Screens */,
 				6750E6FB24B07BC600F25B51 /* Model */,
 				6750E6E424AE4A9900F25B51 /* Extension */,
 				6750E6C224ADBA1800F25B51 /* Main.storyboard */,
@@ -107,13 +107,13 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		67D840B0251C8DD300599B3E /* Modules */ = {
+		67D840B0251C8DD300599B3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				67D840B1251C8DE100599B3E /* Login */,
 				67D840B2251C8DE900599B3E /* Messaging */,
 			);
-			path = Modules;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		67D840B1251C8DE100599B3E /* Login */ = {

@@ -23,16 +23,20 @@ final class MessagingVC: UIViewController {
 
     // MARK: - Public properties
     
-    var socket: WebSocket!
-    var messageArray: [Message] = []
+    private var socket: WebSocket!
+    private var messageArray: [Message] = []
+
+    // MARK: - Private properties
+
     var displayedName = ""
     var username = ""
-    
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupSocket()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,28 +44,19 @@ final class MessagingVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name:  UIResponder.keyboardWillShowNotification, object: nil )
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-
     deinit {
         socket.disconnect()
         socket.delegate = nil
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
-    
+
     // MARK: - Private methods
 
     private func setupView() {
-
-        // "Send" button is not enableds by default
         sendButton.isEnabled = false
-        
-        // Processing tap on the table view to bring down text field and keyboard
+        /// Brings text field and keyboard down
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
         messageTableView.addGestureRecognizer(tapGesture)
-    
-        setupSocket()
     }
     
     private func setupSocket() {
@@ -79,7 +74,7 @@ final class MessagingVC: UIViewController {
         socket.write(string: jsonString)
     }
     
-    /// Sends messages
+    /// Send messages
     private func sendAction() {
         messageTextfield.endEditing(false)
         sendMessage(messageTextfield.text!)
@@ -110,7 +105,6 @@ final class MessagingVC: UIViewController {
                 self.view.layoutIfNeeded()
             })
         }
-
     }
     
     /// Brings text field down
@@ -129,7 +123,7 @@ final class MessagingVC: UIViewController {
 // MARK: - UITableViewDataSource
 
 extension MessagingVC: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         messageArray.count > 0 ? messageArray.count : 1
     }
@@ -142,12 +136,11 @@ extension MessagingVC: UITableViewDataSource {
             let item = messageArray[indexPath.row]
             cell.setupCell(userName: item.name, message: item.text, displayedName: displayedName)
         }
-
         return cell
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: - UITableViewDelegate
 
 extension MessagingVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -155,7 +148,7 @@ extension MessagingVC: UITableViewDelegate {
     }
 }
 
-// MARK: UITextFieldDelegate
+// MARK: - UITextFieldDelegate
 
 extension MessagingVC: UITextFieldDelegate {
 
@@ -182,7 +175,7 @@ extension MessagingVC: UITextFieldDelegate {
 
 }
 
-// MARK: WebSocketDelegate
+// MARK: - WebSocketDelegate
 
 extension MessagingVC: WebSocketDelegate {
     
