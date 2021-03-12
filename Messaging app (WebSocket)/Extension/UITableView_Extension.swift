@@ -10,7 +10,7 @@ import UIKit
 
 extension UITableView {
     
-    /// Auto-scrolling to the latest cell
+    /// Scroll table view to the latest cell
     func scrollToBottom(animated: Bool = true, delay: Double = 0.0) {
         let numberOfRows = self.numberOfRows(inSection: numberOfSections - 1) - 1
         guard numberOfRows > 0 else { return }
