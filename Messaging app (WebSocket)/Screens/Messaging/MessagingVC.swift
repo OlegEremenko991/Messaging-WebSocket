@@ -72,6 +72,7 @@ final class MessagingVC: UIViewController {
         guard let jsonData = try? JSONEncoder().encode(dictToSend),
               let jsonString = String(data: jsonData, encoding: .utf8) else { return }
         socket.write(string: jsonString)
+        messageTableView.scrollToBottom()
     }
     
     /// Send messages
